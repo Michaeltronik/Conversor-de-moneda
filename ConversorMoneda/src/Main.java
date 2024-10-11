@@ -1,3 +1,6 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -57,8 +60,24 @@ public class Main {
                     break;
             }
 
-            ConexionAPI consulta = new ConexionAPI(monedaBase, monedaDestino, cantidad);
-            consulta.consultaAPI();
+
+            mostrarInfo(monedaBase,monedaDestino,cantidad);
+
+        }
+    }
+    public static void mostrarInfo(String monedaBase, String monedaDestino, double cantidad) throws IOException, InterruptedException {
+        ConexionAPI consulta = new ConexionAPI(monedaBase, monedaDestino, cantidad);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        String respuestaJson = consulta.consultaAPI();
+        MonedaApi monedaApi = gson.fromJson(respuestaJson, MonedaApi.class);
+        //System.out.println(monedaApi);
+        Moneda moneda = new Moneda(monedaApi, cantidad);
+        if (moneda.getResultado().equalsIgnoreCase("error")) {
+            System.out.println("ALERTA!!! No se ha podido proceder con la conversion, existe un dato no valido\n" +
+                    "_____________________________________________________________________________________________");
+        } else {
+            System.out.println(moneda);
         }
     }
 }

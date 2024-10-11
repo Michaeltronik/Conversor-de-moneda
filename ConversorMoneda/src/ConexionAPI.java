@@ -8,6 +8,7 @@ public class ConexionAPI {
     private String monedaBase;
     private String monedaDestino;
     private double cantidad;
+    final private String key = "4c0bfb95c42208f8c572816b";
 
     public ConexionAPI(String monedaBase, String monedaDestino, double cantidad) {
         this.monedaDestino = monedaDestino;
@@ -28,9 +29,9 @@ public class ConexionAPI {
         return json;
     }
     public String direccionAPI (){
-        String direccion = "https://v6.exchangerate-api.com/v6/4c0bfb95c42208f8c572816b/pair/" +
+        String direccion = "https://v6.exchangerate-api.com/v6/"+ key +"/pair/" +
                 monedaBase + "/" + monedaDestino + "/" + cantidad;
-        System.out.println(direccion);
+        //System.out.println(direccion);
         return direccion;
     }
 
