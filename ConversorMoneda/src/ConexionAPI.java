@@ -25,9 +25,10 @@ public class ConexionAPI {
         HttpResponse<String> response = client
                 .send(request, HttpResponse.BodyHandlers.ofString());
         String json = response.body();
-        System.out.println(json);
+        //System.out.println(json);
         return json;
     }
+
     public String direccionAPI (){
         String direccion = "https://v6.exchangerate-api.com/v6/"+ key +"/pair/" +
                 monedaBase + "/" + monedaDestino + "/" + cantidad;
