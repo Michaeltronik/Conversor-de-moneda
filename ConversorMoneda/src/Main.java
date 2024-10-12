@@ -12,11 +12,12 @@ public class Main {
         String monedaDestino = "";
         double cantidad = 0;
         Scanner teclado = new Scanner(System.in);
+        ConversionMonedas conversion = new ConversionMonedas();
         int opcion = -1;
 
         System.out.println("Bienvenid@ al conversor de moneda");
 
-        while (opcion != 7) {
+        while (opcion != 8) {
 
             System.out.println("Elija una opcion");
             System.out.println("1. Dolar =>> peso Argentino \n" +
@@ -25,15 +26,16 @@ public class Main {
                     "4. Real Brasileño =>> Dolar\n" +
                     "5. Dolar =>> peso Colombiano\n" +
                     "6. peso Colombiano =>> Dolar\n" +
-                    "7. Salir");
+                    "7. Coversion Personalizada \n" +
+                    "8. Salir");
             try {
                 opcion = teclado.nextInt();
                 teclado.nextLine();
-                if (opcion == 7) {
+                if (opcion == 8) {
                     System.out.println("Gracias, vuelve pronto");
                     break;
                 }
-                if (opcion >= 1 && opcion <= 7) {
+                if (opcion >= 1 && opcion < 7) {
 
                     System.out.println("Ingrese el valor (monto) que desea convertir");
                     cantidad = teclado.nextDouble();
@@ -68,7 +70,8 @@ public class Main {
                                 monedaBase = "COP";
                                 monedaDestino = "USD";
                                 break;
-                            case 8:
+                            case 7:
+                                conversion.entradaPersonalizada(teclado);
                                 break;
                             default:
                                 System.out.println("Opción no valida");
@@ -82,15 +85,14 @@ public class Main {
                 teclado.nextLine();
                 continue;
             }
+             if(opcion !=7) {
+                 mostrarInfo(monedaBase, monedaDestino, cantidad);
 
-
-            mostrarInfo(monedaBase, monedaDestino, cantidad);
-
-
+             }
         }
     }
 
-    public static void mostrarInfo(String monedaBase, String monedaDestino, double cantidad) throws IOException, InterruptedException {
+    public static void mostrarInfo(String monedaBase, String monedaDestino, double cantidad)  {
 
         try {
             ConexionAPI consulta = new ConexionAPI(monedaBase, monedaDestino, cantidad);

@@ -27,7 +27,7 @@ public class Moneda {
     @Override
     public String toString() {
         return (String.format("_______________________________________________________________________________________________________\n\n" +
-                        "El valor: %.2f [%s] corresponde al valor final de ==> %.2f [%s]\n" +
+                        "El valor: %.2f [%s] corresponde al valor final de ==> %.4f [%s]\n" +
                         "_______________________________________________________________________________________________________\n"
                 , cantidad, monedaBase, valorConvertido(), monedaObjetivo));
     }
